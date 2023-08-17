@@ -45,8 +45,8 @@
         },
         dialogVisible: false,
         dialogImageUrl:null,
-        useOss:false, //使用oss->true;使用MinIO->false
-        ossUploadUrl:'http://macro-oss.oss-cn-shenzhen.aliyuncs.com',
+        useOss:true, //使用oss->true;使用MinIO->false
+        ossUploadUrl:'',
         minioUploadUrl:'http://localhost:8080/minio/upload',
       };
     },
@@ -88,6 +88,8 @@
             _self.dataObj.key = response.data.dir + '/${filename}';
             _self.dataObj.dir = response.data.dir;
             _self.dataObj.host = response.data.host;
+            //这里直接设置为后端返回的host
+            _self.ossUploadUrl = response.data.host;
             resolve(true)
           }).catch(err => {
             console.log(err)
